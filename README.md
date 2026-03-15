@@ -1,14 +1,15 @@
 # Mago for VS Code
 
-VS Code extension for the [mago](https://github.com/carthage-software/mago) PHP toolchain.
+[![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/kellymears.vscode-mago)](https://marketplace.visualstudio.com/items?itemName=kellymears.vscode-mago) [![License](https://img.shields.io/github/license/kellymears/vscode-mago-formatter)](LICENSE) [![VS Code](https://img.shields.io/badge/vscode-%5E1.75.0-blue)](https://code.visualstudio.com/)
+
+VS Code extension for the [mago](https://github.com/carthage-software/mago) PHP toolchain — formatting, linting, and static analysis.
 
 ## Features
 
 - **Format** — Format PHP files using `mago format` (format-on-save compatible)
 - **Lint** — Real-time diagnostics from 135+ lint rules across 9 categories
 - **Analyze** — Static analysis diagnostics in the Problems panel
-- **Quick fixes** — Apply safe and unsafe fixes directly from the editor
-- **Fix all** — Batch-apply all safe fixes via command or source action
+- **Code actions** — Quick fixes and batch fix-all from mago suggestions
 - **Explain rule** — View documentation for any lint rule from the command palette
 
 ## Requirements
@@ -28,15 +29,15 @@ Install the [mago CLI](https://github.com/carthage-software/mago). The extension
 | `mago.bin`             | `""`       | Custom binary path                                  |
 | `mago.configPath`      | `""`       | Custom `mago.toml` path                             |
 | `mago.phpVersion`      | `""`       | Override PHP version                                |
-| `mago.lint.enabled`    | `true`     | Enable lint diagnostics                             |
+| `mago.lint.enabled`    | `false`    | Enable lint diagnostics                             |
 | `mago.lint.run`        | `"onSave"` | `"onSave"` or `"onType"`                            |
-| `mago.analyze.enabled` | `true`     | Enable analyzer diagnostics                         |
+| `mago.analyze.enabled` | `false`    | Enable analyzer diagnostics                         |
 | `mago.format.enabled`  | `true`     | Register as formatter                               |
-| `mago.trace.level`     | `"off"`    | Log verbosity (`off`/`error`/`warn`/`info`/`debug`) |
+| `mago.trace.level`     | `"info"`   | Log verbosity (`off`/`error`/`warn`/`info`/`debug`) |
 
 ## Commands
 
-All commands are available via the Command Palette (`Cmd+Shift+P`):
+All commands are available via the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
 
 - **Mago: Format File** — Format the active PHP file
 - **Mago: Lint File** — Lint the active file
@@ -48,3 +49,7 @@ All commands are available via the Command Palette (`Cmd+Shift+P`):
 - **Mago: Explain Rule** — Show documentation for a lint rule
 - **Mago: Show Output** — Open the output channel
 - **Mago: Restart** — Re-resolve binary and refresh diagnostics
+
+## License
+
+[MIT](LICENSE)
