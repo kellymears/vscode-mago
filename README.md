@@ -1,6 +1,6 @@
 # Mago for VS Code
 
-[![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/kellymears.vscode-mago)](https://marketplace.visualstudio.com/items?itemName=kellymears.vscode-mago) [![License](https://img.shields.io/github/license/kellymears/vscode-mago-formatter)](LICENSE) [![VS Code](https://img.shields.io/badge/vscode-%5E1.75.0-blue)](https://code.visualstudio.com/)
+[![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/kellymears.vscode-mago)](https://marketplace.visualstudio.com/items?itemName=kellymears.vscode-mago) [![License](https://img.shields.io/github/license/kellymears/vscode-mago)](LICENSE) [![VS Code](https://img.shields.io/badge/vscode-%5E1.75.0-blue)](https://code.visualstudio.com/)
 
 VS Code extension for the [mago](https://github.com/carthage-software/mago) PHP toolchain — formatting, linting, and static analysis.
 

@@ -1,13 +1,13 @@
 {
   "name": "vscode-mago",
-  "displayName": "Mago",
+  "displayName": "Mago PHP Toolchain",
   "description": "Full-featured PHP toolchain integration: formatting, linting, static analysis via mago CLI",
   "publisher": "kellymears",
   "version": "0.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kellymears/vscode-mago-formatter"
+    "url": "https://github.com/kellymears/vscode-mago"
   },
   "categories": [
     "Formatters",
