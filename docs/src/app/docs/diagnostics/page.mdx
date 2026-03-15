@@ -1,0 +1,62 @@
+import { Table } from "@/components/table";
+
+export const metadata = {
+  title: "Diagnostics",
+  description: "Real-time lint and analysis diagnostics in the Problems panel.",
+};
+
+# Diagnostics
+
+The extension provides two types of diagnostics from the mago CLI: **lint** and **analyze**. Both display results in VS Code's Problems panel but use separate diagnostic collections so you can identify the source.
+
+## Lint Diagnostics
+
+The extension runs mago's linter, which checks your PHP code against 135+ rules across 9 categories (correctness, best practices, consistency, etc.). It invokes `mago lint --reporting-format json` and maps the JSON output to VS Code diagnostics.
+
+**Enable/disable**: [`mago.lint.enabled`](/docs/configuration#magolintenabled)
+
+## Analyzer Diagnostics
+
+The extension runs mago's static analyzer, which performs deeper checks (type analysis, structure, dependencies). It invokes `mago analyze --reporting-format json` alongside the linter.
+
+**Enable/disable**: [`mago.analyze.enabled`](/docs/configuration#magoanalyzeenabled)
+
+## Severity Mapping
+
+Mago issue levels are mapped to VS Code diagnostic severities:
+
+<Table
+  headers={["Mago Level", "VS Code Severity", "Problems Panel Icon"]}
+  rows={[
+    [<code>Error</code>, "Error", "Red circle"],
+    [<code>Warning</code>, "Warning", "Yellow triangle"],
+    [<code>Note</code>, "Information", "Blue circle"],
+    [<code>Help</code>, "Hint", "Three dots"],
+  ]}
+/>
+
+## On-Save vs On-Type
+
+The [`mago.lint.run`](/docs/configuration#magolintrun) setting controls when diagnostics are triggered:
+
+### On Save (default)
+
+Diagnostics run when you save the file. This is the recommended mode — it's efficient and avoids flickering diagnostics while you type.
+
+### On Type
+
+Diagnostics run as you type, with a 300ms debounce. This provides faster feedback but spawns a CLI process on each change. Suitable for fast machines and small files.
+
+> The analyzer always runs on save regardless of this setting, since `mago analyze` is heavier than `mago lint`.
+
+## Workspace-Level Diagnostics
+
+Use the **Mago: Lint Workspace** or **Mago: Analyze Workspace** commands to check all files in the project at once. Results appear in the Problems panel grouped by file.
+
+## Behavior
+
+- **File close**: Diagnostics are cleared when a file is closed.
+- **Config change**: Editing `mago.toml` re-triggers diagnostics for all open PHP files (debounced).
+- **Settings change**: Disabling `mago.lint.enabled` immediately clears lint diagnostics.
+- **Help text**: The diagnostic message includes mago's help text with suggested fixes.
+- **Related locations**: Secondary annotations from mago are shown as related information in the diagnostic.

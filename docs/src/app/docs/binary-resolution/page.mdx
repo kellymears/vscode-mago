@@ -1,0 +1,58 @@
+import { Table } from "@/components/table";
+
+export const metadata = {
+  title: "Binary Resolution",
+  description: "How the Mago extension finds the mago binary.",
+};
+
+# Binary Resolution
+
+The extension needs to locate the `mago` binary to function. It searches multiple locations in a defined order, using the first executable it finds.
+
+## Resolution Order
+
+<Table
+  headers={["Priority", "Location", "Example"]}
+  rows={[
+    ["1", <><code>mago.bin</code> setting</>, <code>/usr/local/bin/mago</code>],
+    ["2", <code>./vendor/bin/mago</code>, "Composer local install"],
+    ["3", <code>./mago</code>, "Binary in workspace root"],
+    ["4", <>System <code>$PATH</code></>, "Global install"],
+  ]}
+/>
+
+The search stops at the first match. If none are found, the extension shows an error notification with a link to open the `mago.bin` setting.
+
+## Custom Path
+
+Set `mago.bin` in your VS Code settings to skip auto-detection:
+
+```json
+{ "mago.bin": "/path/to/mago" }
+```
+
+The path must be absolute and the file must be executable. If the configured path is invalid, the extension falls through to the remaining candidates.
+
+## Version Validation
+
+After resolving the binary, the extension runs `mago --version` to confirm it's working. The version is displayed in the status bar (e.g., **Mago v1.0.0-beta.27**).
+
+## Troubleshooting
+
+**Status bar shows error icon:**
+The binary was not found. Check that mago is installed:
+
+```sh
+which mago           # Check global install
+ls vendor/bin/mago   # Check Composer install
+mago --version       # Verify it runs
+```
+
+**Binary found but version check fails:**
+The file at the resolved path may not be a valid mago binary. Set `mago.trace.level` to `"debug"` and check the output channel for details.
+
+**Multiple workspaces:**
+The binary is resolved per workspace folder. Each folder searches independently, so different projects can use different mago versions.
+
+**After installing mago:**
+Run **Mago: Restart** from the command palette to re-resolve the binary without reloading VS Code.

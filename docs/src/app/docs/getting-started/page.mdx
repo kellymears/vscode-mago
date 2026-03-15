@@ -1,0 +1,60 @@
+import { Hero } from "@/components/hero";
+
+export const metadata = {
+  title: "Getting Started",
+  description: "Install the Mago VS Code extension for the mago PHP toolchain.",
+};
+
+<Hero />
+
+## Requirements
+
+- **VS Code** 1.75 or later
+- **mago CLI** installed and accessible (see [Binary Resolution](/docs/binary-resolution) for details)
+
+## Installation
+
+Install from the VS Code Marketplace, or build from source:
+
+```sh
+# Clone and package
+git clone https://github.com/kellymears/vscode-mago-formatter
+cd vscode-mago-formatter
+npm install && npm run build
+npx vsce package
+
+# Install the .vsix
+code --install-extension vscode-mago-*.vsix
+```
+
+## Quick Setup
+
+1. Install the mago binary in your project or globally:
+
+```sh
+# Via Composer (project-local)
+composer require carthage-software/mago
+
+# Or download the binary directly
+# See https://github.com/carthage-software/mago
+```
+
+2. Open a PHP project in VS Code.
+3. The extension activates automatically when a PHP file is opened.
+4. Set Mago as your default PHP formatter:
+
+```json
+{
+  "editor.defaultFormatter": "kellymears.vscode-mago",
+  "editor.formatOnSave": true,
+  "[php]": {
+    "editor.defaultFormatter": "kellymears.vscode-mago"
+  }
+}
+```
+
+## Verify
+
+Open a PHP file and check the status bar — you should see **mago v1.x.x (the CLI version)** in the bottom-right. If you see an error icon, check the [Binary Resolution](/docs/binary-resolution) guide.
+
+Open the command palette (`Cmd+Shift+P`) and type "Mago" to see all available [commands](/docs/commands).

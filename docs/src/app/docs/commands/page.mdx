@@ -1,0 +1,78 @@
+export const metadata = {
+  title: "Commands",
+  description: "All Mago command palette commands.",
+};
+
+# Commands
+
+All commands are available via the Command Palette (`Cmd+Shift+P` on macOS, `Ctrl+Shift+P` on Windows/Linux). Commands that operate on a file are only shown when a PHP file is active.
+
+---
+
+## Mago: Format File
+
+Formats the active PHP file using `mago format --stdin-input`. This is equivalent to VS Code's built-in "Format Document" command when Mago is set as the default formatter.
+
+---
+
+## Mago: Lint File
+
+Runs `mago lint` on the active file and displays results in the Problems panel. This is the same operation that runs automatically on save (or on type, depending on your [`mago.lint.run`](/docs/configuration#magolintrun) setting).
+
+---
+
+## Mago: Lint Workspace
+
+Runs `mago lint` across the entire workspace — not just the active file. Results for all files appear in the Problems panel. Useful for a full project audit.
+
+---
+
+## Mago: Analyze File
+
+Runs `mago analyze` on the active file. Analyzer diagnostics appear alongside lint diagnostics in the Problems panel but in a separate collection, so you can distinguish between the two.
+
+---
+
+## Mago: Analyze Workspace
+
+Runs `mago analyze` across the entire workspace.
+
+---
+
+## Mago: Fix File (Safe)
+
+Applies all **safe** automatic fixes to the active file by running `mago lint --fix`. Safe fixes are guaranteed to preserve your code's behavior.
+
+After fixing, diagnostics are re-run to update the Problems panel.
+
+---
+
+## Mago: Fix File (All Including Unsafe)
+
+Applies **all** fixes — safe, potentially unsafe, and unsafe — to the active file. A confirmation dialog is shown before proceeding, since unsafe fixes may change code behavior.
+
+Runs `mago lint --fix --unsafe --potentially-unsafe`.
+
+---
+
+## Mago: Show Output
+
+Opens the Mago output channel where CLI invocations and errors are logged. The verbosity is controlled by the [`mago.trace.level`](/docs/configuration#magotracelevel) setting.
+
+You can also click the **Mago** status bar item to open this channel.
+
+---
+
+## Mago: Restart
+
+Re-resolves the mago binary, clears all diagnostics, and re-runs diagnostics on open PHP files. Use this after:
+
+- Installing or updating the mago binary
+- Changing the `mago.bin` setting
+- Recovering from a binary crash
+
+---
+
+## Mago: Explain Rule
+
+Prompts for a lint rule code (e.g., `strict-types`) and displays the rule's documentation — description, good/bad examples, and category. The documentation is fetched via `mago lint --explain`.

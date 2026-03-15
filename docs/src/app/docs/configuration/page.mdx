@@ -1,0 +1,152 @@
+import { SettingMeta } from "@/components/setting-meta";
+
+export const metadata = {
+  title: "Configuration",
+  description: "All Mago extension settings and their defaults.",
+};
+
+# Configuration
+
+All settings are under the `mago.*` namespace in your VS Code `settings.json`. The extension reads these at activation and responds to changes in real time.
+
+> Mago also reads `mago.toml` for formatter and linter configuration. Extension settings control the *VS Code integration* behavior; `mago.toml` controls *mago's own* rules, presets, and excludes.
+
+---
+
+## `mago.enabled`
+
+<SettingMeta type="boolean" defaultValue="true" />
+
+Master switch for the entire extension. When `false`, all features are disabled — no formatting, no diagnostics, no status bar. Useful for temporarily disabling Mago without uninstalling.
+
+```json
+{ "mago.enabled": false }
+```
+
+---
+
+## `mago.bin`
+
+<SettingMeta type="string" defaultValue='""  (auto-detect)' />
+
+Absolute path to the `mago` binary. When set, the extension skips auto-detection and uses this path directly. The binary must be executable.
+
+```json
+{ "mago.bin": "/usr/local/bin/mago" }
+```
+
+When left empty, the extension searches in order:
+1. `./vendor/bin/mago` (Composer local)
+2. `./mago` (workspace root)
+3. System `$PATH`
+
+See [Binary Resolution](/docs/binary-resolution) for the full algorithm.
+
+---
+
+## `mago.configPath`
+
+<SettingMeta type="string" defaultValue='""  (auto-detect)' />
+
+Path to a custom `mago.toml` configuration file. When empty, mago searches the workspace root automatically.
+
+This is useful when your config lives outside the workspace root, or when you want to use different configurations for different tasks.
+
+```json
+{ "mago.configPath": "/path/to/custom/mago.toml" }
+```
+
+---
+
+## `mago.phpVersion`
+
+<SettingMeta type="string" defaultValue='""  (use mago default)' />
+
+Override the PHP version used for parsing and analysis. Accepts version strings like `"8.2"` or `"8.3"`. This overrides both the `php-version` key in `mago.toml` and the `MAGO_PHP_VERSION` environment variable.
+
+```json
+{ "mago.phpVersion": "8.2" }
+```
+
+---
+
+## `mago.lint.enabled`
+
+<SettingMeta type="boolean" defaultValue="true" />
+
+Enable or disable lint diagnostics. When enabled, the extension runs `mago lint` and displays results in the Problems panel. When disabled, the lint diagnostic collection is cleared.
+
+```json
+{ "mago.lint.enabled": false }
+```
+
+---
+
+## `mago.lint.run`
+
+<SettingMeta type={'"onSave" | "onType"'} defaultValue='"onSave"' />
+
+Controls when the linter runs:
+
+- **`onSave`** — Lint when the file is saved. Lower resource usage, no flicker.
+- **`onType`** — Lint as you type, with a 300ms debounce. Provides faster feedback but runs the CLI more frequently.
+
+```json
+{ "mago.lint.run": "onType" }
+```
+
+> Since mago is a CLI tool (not an LSP), `onType` mode spawns a process on each debounced change. For large files or slow machines, `onSave` is recommended.
+
+---
+
+## `mago.analyze.enabled`
+
+<SettingMeta type="boolean" defaultValue="true" />
+
+Enable or disable static analysis diagnostics. The analyzer runs `mago analyze` alongside the linter and displays results in the same Problems panel, but in a separate diagnostic collection.
+
+```json
+{ "mago.analyze.enabled": false }
+```
+
+---
+
+## `mago.format.enabled`
+
+<SettingMeta type="boolean" defaultValue="true" />
+
+Register Mago as a PHP formatting provider. When enabled, you can use Mago with VS Code's "Format Document" command and format-on-save. When disabled, the formatter is unregistered.
+
+```json
+{ "mago.format.enabled": true }
+```
+
+---
+
+## `mago.trace.level`
+
+<SettingMeta type={'"off" | "error" | "warn" | "info" | "debug"'} defaultValue='"off"' />
+
+Controls log verbosity in the **Mago** output channel (View → Output → select "Mago"). Useful for troubleshooting.
+
+```json
+{ "mago.trace.level": "debug" }
+```
+
+---
+
+## Example: Full Configuration
+
+```json
+{
+  "mago.enabled": true,
+  "mago.bin": "",
+  "mago.configPath": "",
+  "mago.phpVersion": "8.3",
+  "mago.lint.enabled": true,
+  "mago.lint.run": "onSave",
+  "mago.analyze.enabled": true,
+  "mago.format.enabled": true,
+  "mago.trace.level": "off"
+}
+```
