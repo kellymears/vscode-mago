@@ -39,12 +39,13 @@ function execMago(options: ExecOptions): Promise<CliResult> {
   });
 }
 
-function buildCommonArgs(
+/** Global flags that must precede the subcommand: `mago [OPTIONS] <COMMAND>` */
+function buildGlobalArgs(
+  workspaceRoot: string,
   configPath: string | undefined,
   phpVersion: string | undefined,
-  workspaceRoot: string,
 ): string[] {
-  const args: string[] = ["--workspace", workspaceRoot, "--no-color"];
+  const args: string[] = ["--workspace", workspaceRoot, "--colors", "never"];
   if (configPath) args.push("--config", configPath);
   if (phpVersion) args.push("--php-version", phpVersion);
   return args;
@@ -60,9 +61,9 @@ export async function format(
   phpVersion?: string,
 ): Promise<{ formatted: string; error?: string }> {
   const args = [
+    ...buildGlobalArgs(cwd, configPath, phpVersion),
     "format",
     "--stdin-input",
-    ...buildCommonArgs(configPath, phpVersion, cwd),
   ];
 
   const result = await execMago({ binaryPath, args, cwd, stdin: source });
@@ -86,10 +87,10 @@ export async function lint(
   phpVersion?: string,
 ): Promise<MagoIssue[]> {
   const args = [
+    ...buildGlobalArgs(cwd, configPath, phpVersion),
     "lint",
     "--reporting-format",
     "json",
-    ...buildCommonArgs(configPath, phpVersion, cwd),
     filePath,
   ];
 
@@ -103,10 +104,10 @@ export async function lintWorkspace(
   phpVersion?: string,
 ): Promise<MagoIssue[]> {
   const args = [
+    ...buildGlobalArgs(cwd, configPath, phpVersion),
     "lint",
     "--reporting-format",
     "json",
-    ...buildCommonArgs(configPath, phpVersion, cwd),
   ];
 
   return runDiagnosticCommand(binaryPath, cwd, args, "lint workspace");
@@ -122,10 +123,10 @@ export async function analyze(
   phpVersion?: string,
 ): Promise<MagoIssue[]> {
   const args = [
+    ...buildGlobalArgs(cwd, configPath, phpVersion),
     "analyze",
     "--reporting-format",
     "json",
-    ...buildCommonArgs(configPath, phpVersion, cwd),
     filePath,
   ];
 
@@ -139,10 +140,10 @@ export async function analyzeWorkspace(
   phpVersion?: string,
 ): Promise<MagoIssue[]> {
   const args = [
+    ...buildGlobalArgs(cwd, configPath, phpVersion),
     "analyze",
     "--reporting-format",
     "json",
-    ...buildCommonArgs(configPath, phpVersion, cwd),
   ];
 
   return runDiagnosticCommand(binaryPath, cwd, args, "analyze workspace");
@@ -158,16 +159,10 @@ export async function fix(
   configPath?: string,
   phpVersion?: string,
 ): Promise<{ success: boolean; error?: string }> {
-  const args = [
-    "lint",
-    "--fix",
-    ...buildCommonArgs(configPath, phpVersion, cwd),
-    filePath,
-  ];
+  const subArgs = ["lint", "--fix", filePath];
+  if (unsafe) subArgs.push("--unsafe", "--potentially-unsafe");
 
-  if (unsafe) {
-    args.push("--unsafe", "--potentially-unsafe");
-  }
+  const args = [...buildGlobalArgs(cwd, configPath, phpVersion), ...subArgs];
 
   const result = await execMago({ binaryPath, args, cwd });
 
@@ -189,7 +184,7 @@ export async function explainRule(
 ): Promise<string> {
   const result = await execMago({
     binaryPath,
-    args: ["lint", "--explain", ruleCode, "--no-color"],
+    args: ["--colors", "never", "lint", "--explain", ruleCode],
     cwd,
   });
 
