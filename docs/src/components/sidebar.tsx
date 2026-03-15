@@ -20,19 +20,10 @@ const navigation: NavGroup[] = [
     items: [{ title: "Getting Started", href: "/docs/getting-started" }],
   },
   {
-    label: "Features",
-    items: [
-      { title: "Formatting", href: "/docs/formatting" },
-      { title: "Diagnostics", href: "/docs/diagnostics" },
-      { title: "Code Actions", href: "/docs/code-actions" },
-    ],
-  },
-  {
     label: "Reference",
     items: [
       { title: "Configuration", href: "/docs/configuration" },
       { title: "Commands", href: "/docs/commands" },
-      { title: "Binary Resolution", href: "/docs/binary-resolution" },
     ],
   },
 ];

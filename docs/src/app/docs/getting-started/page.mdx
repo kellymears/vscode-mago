@@ -1,16 +1,16 @@
-import { Hero } from "@/components/hero";
-
 export const metadata = {
   title: "Getting Started",
-  description: "Install the Mago VS Code extension for the mago PHP toolchain.",
+  description: "Install the Mago VS Code extension and set up the mago CLI.",
 };
 
-<Hero />
+# Getting Started
+
+> For mago CLI documentation — formatting rules, linter configuration, and analysis options — see [mago on GitHub](https://github.com/carthage-software/mago).
 
 ## Requirements
 
 - **VS Code** 1.75 or later
-- **mago CLI** installed and accessible (see [Binary Resolution](/docs/binary-resolution) for details)
+- **mago CLI** installed and accessible
 
 ## Installation
 
@@ -53,8 +53,19 @@ composer require carthage-software/mago
 }
 ```
 
+## Binary Resolution
+
+The extension searches for the `mago` binary in the following order, using the first executable it finds:
+
+1. **`mago.bin` setting** — explicit path in VS Code settings
+2. **`./vendor/bin/mago`** — Composer local install
+3. **`./mago`** — binary in workspace root
+4. **System `$PATH`** — global install
+
+If none are found, the extension shows an error notification. Set `mago.bin` in your [configuration](/docs/configuration) to use a specific path.
+
 ## Verify
 
-Open a PHP file and check the status bar — you should see **mago v1.x.x (the CLI version)** in the bottom-right. If you see an error icon, check the [Binary Resolution](/docs/binary-resolution) guide.
+Open a PHP file and check the status bar — you should see **mago** with the CLI version in the bottom-right. If you see an error icon, check that the binary is installed and accessible.
 
 Open the command palette (`Cmd+Shift+P`) and type "Mago" to see all available [commands](/docs/commands).

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: "%s — Mago Docs",
   },
   description:
-    "Full-featured VS Code extension that integrates the mago PHP toolchain: formatting, linting, static analysis, and code actions.",
+    "VS Code extension for the mago PHP toolchain — configuration, commands, and setup.",
 };
 
 export default function RootLayout({

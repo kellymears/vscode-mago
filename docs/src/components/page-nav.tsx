@@ -7,12 +7,8 @@ import { cn } from "@/lib/utils";
 
 const pages = [
   { title: "Getting Started", href: "/docs/getting-started" },
-  { title: "Formatting", href: "/docs/formatting" },
-  { title: "Diagnostics", href: "/docs/diagnostics" },
-  { title: "Code Actions", href: "/docs/code-actions" },
   { title: "Configuration", href: "/docs/configuration" },
   { title: "Commands", href: "/docs/commands" },
-  { title: "Binary Resolution", href: "/docs/binary-resolution" },
 ];
 
 export function PageNav() {

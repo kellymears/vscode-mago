@@ -40,7 +40,7 @@ When left empty, the extension searches in order:
 2. `./mago` (workspace root)
 3. System `$PATH`
 
-See [Binary Resolution](/docs/binary-resolution) for the full algorithm.
+See [Binary Resolution](/docs/getting-started#binary-resolution) for the full search order.
 
 ---
 
@@ -72,7 +72,7 @@ Override the PHP version used for parsing and analysis. Accepts version strings 
 
 ## `mago.lint.enabled`
 
-<SettingMeta type="boolean" defaultValue="true" />
+<SettingMeta type="boolean" defaultValue="false" />
 
 Enable or disable lint diagnostics. When enabled, the extension runs `mago lint` and displays results in the Problems panel. When disabled, the lint diagnostic collection is cleared.
 
@@ -101,7 +101,7 @@ Controls when the linter runs:
 
 ## `mago.analyze.enabled`
 
-<SettingMeta type="boolean" defaultValue="true" />
+<SettingMeta type="boolean" defaultValue="false" />
 
 Enable or disable static analysis diagnostics. The analyzer runs `mago analyze` alongside the linter and displays results in the same Problems panel, but in a separate diagnostic collection.
 
@@ -125,7 +125,7 @@ Register Mago as a PHP formatting provider. When enabled, you can use Mago with 
 
 ## `mago.trace.level`
 
-<SettingMeta type={'"off" | "error" | "warn" | "info" | "debug"'} defaultValue='"off"' />
+<SettingMeta type={'"off" | "error" | "warn" | "info" | "debug"'} defaultValue='"info"' />
 
 Controls log verbosity in the **Mago** output channel (View → Output → select "Mago"). Useful for troubleshooting.
 
@@ -143,10 +143,10 @@ Controls log verbosity in the **Mago** output channel (View → Output → selec
   "mago.bin": "",
   "mago.configPath": "",
   "mago.phpVersion": "8.3",
-  "mago.lint.enabled": true,
+  "mago.lint.enabled": false,
   "mago.lint.run": "onSave",
-  "mago.analyze.enabled": true,
+  "mago.analyze.enabled": false,
   "mago.format.enabled": true,
-  "mago.trace.level": "off"
+  "mago.trace.level": "info"
 }
 ```
