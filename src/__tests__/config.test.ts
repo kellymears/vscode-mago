@@ -19,7 +19,7 @@ describe("config", () => {
       expect(settings.lint.run).toBe("onSave");
       expect(settings.analyze.enabled).toBe(true);
       expect(settings.format.enabled).toBe(true);
-      expect(settings.trace.level).toBe("off");
+      expect(settings.trace.level).toBe("info");
     });
 
     it("reads from vscode workspace configuration", () => {

@@ -22,7 +22,7 @@ export function getSettings(): MagoSettings {
     trace: {
       level: config.get<"off" | "error" | "warn" | "info" | "debug">(
         "trace.level",
-        "off",
+        "info",
       ),
     },
   };

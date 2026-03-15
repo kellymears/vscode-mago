@@ -79,7 +79,7 @@ function defaultSettings(overrides?: Partial<MagoSettings>): MagoSettings {
     lint: { enabled: true, run: "onSave" },
     analyze: { enabled: true },
     format: { enabled: true },
-    trace: { level: "off" },
+    trace: { level: "info" },
     ...overrides,
   };
 }

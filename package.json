@@ -79,7 +79,7 @@
         },
         "mago.lint.enabled": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "markdownDescription": "Enable lint diagnostics in the Problems panel."
         },
         "mago.lint.run": {
@@ -93,8 +93,8 @@
         },
         "mago.analyze.enabled": {
           "type": "boolean",
-          "default": true,
-          "markdownDescription": "Enable analyzer diagnostics in the Problems panel."
+          "default": false,
+          "markdownDescription": "Enable analyzer diagnostics in the Problems panel. Requires project stubs for frameworks like WordPress."
         },
         "mago.format.enabled": {
           "type": "boolean",
@@ -110,7 +110,7 @@
             "info",
             "debug"
           ],
-          "default": "off",
+          "default": "info",
           "markdownDescription": "Log verbosity in the Mago output channel."
         }
       }
