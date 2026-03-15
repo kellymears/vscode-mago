@@ -1,24 +1,50 @@
 {
-  "name": "vscode-mago-formatter",
-  "displayName": "Mago Formatter",
-  "description": "Formats PHP files using mago, respecting mago.toml excludes",
+  "name": "vscode-mago",
+  "displayName": "Mago",
+  "description": "Full-featured PHP toolchain integration: formatting, linting, static analysis via mago CLI",
   "publisher": "kellymears",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/kellymears/vscode-mago-formatter"
   },
   "categories": [
-    "Formatters"
+    "Formatters",
+    "Linters",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "php",
+    "mago",
+    "formatter",
+    "linter",
+    "static analysis"
   ],
   "engines": {
     "vscode": "^1.75.0"
   },
-  "main": "./extension.js",
+  "main": "./dist/extension.js",
   "activationEvents": [
     "onLanguage:php"
   ],
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "typecheck": "tsc --noEmit",
+    "typecheck:test": "tsc --noEmit -p tsconfig.test.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "npm run build && vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.75.0",
+    "@vitest/coverage-v8": "^4.1.0",
+    "typescript": "^5.7.0",
+    "vite": "^7.3.1",
+    "vitest": "^4.1.0"
+  },
   "contributes": {
     "languages": [
       {
@@ -27,6 +53,133 @@
           ".php"
         ]
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Mago",
+      "properties": {
+        "mago.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable or disable the Mago extension entirely."
+        },
+        "mago.bin": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Absolute path to the `mago` binary. If empty, the extension searches `./vendor/bin/mago`, `./mago`, then `$PATH`."
+        },
+        "mago.configPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to a custom `mago.toml` configuration file. If empty, mago searches the workspace root."
+        },
+        "mago.phpVersion": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Override the PHP version for parsing and analysis (e.g. `8.2`). Overrides `mago.toml` and `MAGO_PHP_VERSION`."
+        },
+        "mago.lint.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable lint diagnostics in the Problems panel."
+        },
+        "mago.lint.run": {
+          "type": "string",
+          "enum": [
+            "onSave",
+            "onType"
+          ],
+          "default": "onSave",
+          "markdownDescription": "When to run the linter. `onSave` runs on file save; `onType` runs as you type (with debounce)."
+        },
+        "mago.analyze.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Enable analyzer diagnostics in the Problems panel."
+        },
+        "mago.format.enabled": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Register Mago as a PHP formatting provider."
+        },
+        "mago.trace.level": {
+          "type": "string",
+          "enum": [
+            "off",
+            "error",
+            "warn",
+            "info",
+            "debug"
+          ],
+          "default": "off",
+          "markdownDescription": "Log verbosity in the Mago output channel."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "mago.format",
+        "title": "Mago: Format File"
+      },
+      {
+        "command": "mago.lint",
+        "title": "Mago: Lint File"
+      },
+      {
+        "command": "mago.lintWorkspace",
+        "title": "Mago: Lint Workspace"
+      },
+      {
+        "command": "mago.analyze",
+        "title": "Mago: Analyze File"
+      },
+      {
+        "command": "mago.analyzeWorkspace",
+        "title": "Mago: Analyze Workspace"
+      },
+      {
+        "command": "mago.fix",
+        "title": "Mago: Fix File (Safe)"
+      },
+      {
+        "command": "mago.fixUnsafe",
+        "title": "Mago: Fix File (All Including Unsafe)"
+      },
+      {
+        "command": "mago.showOutput",
+        "title": "Mago: Show Output"
+      },
+      {
+        "command": "mago.restart",
+        "title": "Mago: Restart"
+      },
+      {
+        "command": "mago.showRuleDoc",
+        "title": "Mago: Explain Rule"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "mago.format",
+          "when": "editorLangId == php"
+        },
+        {
+          "command": "mago.lint",
+          "when": "editorLangId == php"
+        },
+        {
+          "command": "mago.analyze",
+          "when": "editorLangId == php"
+        },
+        {
+          "command": "mago.fix",
+          "when": "editorLangId == php"
+        },
+        {
+          "command": "mago.fixUnsafe",
+          "when": "editorLangId == php"
+        }
+      ]
+    }
   }
 }
