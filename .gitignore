@@ -5,3 +5,6 @@ coverage/
 .next/
 out/
 .claude/
+
+# Local Netlify folder
+.netlify
