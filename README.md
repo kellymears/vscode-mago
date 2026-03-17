@@ -9,7 +9,7 @@ VS Code extension for the [mago](https://github.com/carthage-software/mago) PHP 
 **From the VS Code Marketplace** (recommended):
 
 1. Open VS Code
-2. Press `Ctrl+Shift+X` (`Cmd+Shift+X` on macOS) to open Extensions
+2. Press `⌃⇧X` (`⌘⇧X` on MacOS) to open Extensions
 3. Search for **"Mago PHP Toolchain"**
 4. Click **Install**
 
@@ -54,7 +54,7 @@ Install the [mago CLI](https://github.com/carthage-software/mago). The extension
 
 ## Commands
 
-All commands are available via the Command Palette (`Ctrl+Shift+P` / `Cmd+Shift+P`):
+All commands are available via the Command Palette (`⌃⇧P` / `⌘⇧P`):
 
 - **Mago: Format File** — Format the active PHP file
 - **Mago: Lint File** — Lint the active file
