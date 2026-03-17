@@ -22,5 +22,8 @@ export default defineConfig({
     alias: {
       vscode: new URL("./src/__mocks__/vscode.ts", import.meta.url).pathname,
     },
+    coverage: {
+      reporter: ["text", "json-summary"],
+    },
   },
 });
