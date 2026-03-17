@@ -32,7 +32,7 @@ export function Header() {
         <ThemeToggle />
 
         <a
-          href="https://github.com/kellymears/vscode-mago-formatter"
+          href="https://github.com/kellymears/vscode-mago"
           target="_blank"
           rel="noopener noreferrer"
           className={cn(
