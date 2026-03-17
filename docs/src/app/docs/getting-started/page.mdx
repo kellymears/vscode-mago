@@ -14,12 +14,26 @@ export const metadata = {
 
 ## Installation
 
-Install from the VS Code Marketplace, or build from source:
+### From the VS Code Marketplace (recommended)
+
+1. Open VS Code
+2. Press `Ctrl+Shift+X` (`Cmd+Shift+X` on macOS) to open the Extensions panel
+3. Search for **"Mago PHP Toolchain"**
+4. Click **Install**
+
+Or install from the command line:
 
 ```sh
-# Clone and package
-git clone https://github.com/kellymears/vscode-mago-formatter
-cd vscode-mago-formatter
+code --install-extension kellymears.vscode-mago
+```
+
+**[View on Marketplace →](https://marketplace.visualstudio.com/items?itemName=kellymears.vscode-mago)**
+
+### Build from source
+
+```sh
+git clone https://github.com/kellymears/vscode-mago
+cd vscode-mago
 npm install && npm run build
 npx vsce package
 

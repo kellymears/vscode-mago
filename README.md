@@ -4,6 +4,23 @@
 
 VS Code extension for the [mago](https://github.com/carthage-software/mago) PHP toolchain — formatting, linting, and static analysis.
 
+## Install
+
+**From the VS Code Marketplace** (recommended):
+
+1. Open VS Code
+2. Press `Ctrl+Shift+X` (`Cmd+Shift+X` on macOS) to open Extensions
+3. Search for **"Mago PHP Toolchain"**
+4. Click **Install**
+
+Or install directly from the command line:
+
+```sh
+code --install-extension kellymears.vscode-mago
+```
+
+**[View on Marketplace →](https://marketplace.visualstudio.com/items?itemName=kellymears.vscode-mago)**
+
 ## Features
 
 - **Format** — Format PHP files using `mago format` (format-on-save compatible)
